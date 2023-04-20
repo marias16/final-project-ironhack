@@ -17,6 +17,7 @@ export const useTasksStore = defineStore('tasksList', () => {
     }
 
     tasks.value = data;
+    console.log(tasks.value)
   }
 
   async function _addNewTask({title, user_id}) {
@@ -31,6 +32,22 @@ export const useTasksStore = defineStore('tasksList', () => {
     }
 
     tasks.value.push(...data)
+    console.log(tasks.value)
   }
-  return { tasks, _fetchAllTasks, _addNewTask  } 
+
+  async function _deleteTask(taskId) {
+    const { error } = await supabase
+      .from('tasks')
+      .delete()
+      .eq('id', taskId)
+
+    if(error) {
+        console.error(error)
+        return
+      }
+
+    _fetchAllTasks()
+
+  }
+  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask  } 
 })
