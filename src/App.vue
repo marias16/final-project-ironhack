@@ -1,5 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { useTasksStore } from './stores/tasks'
+
+const tasks = useTasksStore();
+tasks._fetchAllTasks();
 </script>
 
 <template>
