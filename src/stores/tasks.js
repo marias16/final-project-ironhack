@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase/index'
 
@@ -44,7 +44,9 @@ export const useTasksStore = defineStore('tasksList', () => {
     if(error) {
         console.error(error)
         return
-      }
+    }
+
+    _fetchAllTasks()
   }
 
   //edit a task
@@ -84,8 +86,13 @@ export const useTasksStore = defineStore('tasksList', () => {
       return
     }
     
+    _fetchAllTasks()
   }
 
+  //calculate incomplete tasks
 
-  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus  } 
+  const _incompleteTasks = computed(() => tasks.value.filter(task => task.is_complete === false).length)
+ 
+
+  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus, _incompleteTasks } 
 })
