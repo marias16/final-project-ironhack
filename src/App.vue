@@ -1,9 +1,13 @@
 <script setup>
+import  { onBeforeMount }  from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import { useTasksStore } from './stores/tasks'
+import { useUsersStore } from './stores/users'
+const users = useUsersStore();
 
-const tasks = useTasksStore();
-tasks._fetchAllTasks();
+onBeforeMount(async () => {
+      await users._fetchUser()
+})
+
 </script>
 
 <template>
@@ -11,6 +15,10 @@ tasks._fetchAllTasks();
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/auth/sign-in">Sign-in</RouterLink>
+        <RouterLink to="/auth/sign-up">Sign-up</RouterLink>
+        <button @click="users._signOut">Sign out</button>
+        <button @click="users._fetchUser">Fetch user</button>
       </nav>
       
     </div>
