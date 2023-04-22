@@ -2,11 +2,14 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useUsersStore = defineStore('users', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
+  const user = ref({})
+  
+  function signIn() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: 'example@email.com',
+      password: 'example-password',
+    })
   }
 
-  return { count, doubleCount, increment } 
+  return { user,  } 
 })
