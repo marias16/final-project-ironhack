@@ -10,10 +10,10 @@ const tasks = useTasksStore();
     <p v-if="tasks._incompleteTasks === 0"> Congrats! You completed all tasks </p>
     <ul>
         <li v-for="task in tasks.tasks" :key="task.id" v-show="!task.is_complete">
-            <input type="checkbox" :checked="task.is_complete" @change="tasks._updateStatus(task.id, $event.target.checked)">
+            <input type="checkbox" :checked="task.is_complete" @change="tasks._updateStatus(task, $event.target.checked)">
             <input v-if="tasks.editMode && tasks.editTaskId === task.id" v-model="task.title">
             <span v-else>{{  task.title }}</span>
-            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks._updateTitle(task.id, task.title)">Save</button>
+            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks._updateTitle(task)">Save</button>
             <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks.editMode = false" >Cancel</button>
             <button v-else @click="tasks._editTask(task.id)">Edit task</button>
             <button @click="tasks._deleteTask(task.id)">Delete task</button>
@@ -24,10 +24,10 @@ const tasks = useTasksStore();
     <h2>Done</h2>
     <ul>
         <li v-for="task in tasks.tasks" :key="task.id" v-show="task.is_complete">
-            <input type="checkbox" :checked="task.is_complete" @change="tasks._updateStatus(task.id, $event.target.checked)">
+            <input type="checkbox" :checked="task.is_complete" @change="tasks._updateStatus(task, $event.target.checked)">
             <input v-if="tasks.editMode && tasks.editTaskId === task.id" v-model="task.title">
             <span v-else>{{  task.title }}</span>
-            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks._updateTitle(task.id, task.title)">Save</button>
+            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks._updateTitle(task)">Save</button>
             <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks.editMode = false" >Cancel</button>
             <button v-else @click="tasks._editTask(task.id)">Edit task</button>
             <button @click="tasks._deleteTask(task.id)">Delete task</button>

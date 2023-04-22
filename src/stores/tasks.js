@@ -46,7 +46,7 @@ export const useTasksStore = defineStore('tasksList', () => {
         return
     }
 
-    _fetchAllTasks()
+    tasks.value = tasks.value.filter(task => task.id !== taskId )
   }
 
   //edit a task
@@ -58,12 +58,12 @@ export const useTasksStore = defineStore('tasksList', () => {
     editTaskId.value = taskId;
   }
 
-  async function _updateTitle(taskId, titleOfTask){
+  async function _updateTitle(task){
 
     const { error } = await supabase
     .from('tasks')
-    .update({ title: titleOfTask})
-    .eq('id', taskId)
+    .update({ title: task.title})
+    .eq('id', task.id)
 
     if(error) {
       console.error(error)
@@ -75,18 +75,20 @@ export const useTasksStore = defineStore('tasksList', () => {
     editTaskId.value = null;
   }
 
-  async function _updateStatus(taskId, completeStatus){
-    const { error } = await supabase
+  async function _updateStatus(task, completeStatus){
+    const { data, error } = await supabase
     .from('tasks')
     .update({ is_complete: completeStatus})
-    .eq('id', taskId)
+    .eq('id', task.id)
+    .select()
 
     if(error) {
       console.error(error)
       return
     }
     
-    _fetchAllTasks()
+    const taskIndex = tasks.value.indexOf(task);
+    tasks.value[taskIndex] = data[0];
   }
 
   //calculate incomplete tasks
