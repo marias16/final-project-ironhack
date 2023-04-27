@@ -1,12 +1,21 @@
 <script setup>
-import  { onBeforeMount }  from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import { useUsersStore } from './stores/users'
 import router from '@/router/index'
 const users = useUsersStore();
 
-onBeforeMount(async () => {
-      await users._fetchUser()
+router.beforeEach(async (to, from, next) => {
+  
+  await users._fetchUser()
+  
+  console.log(users.currentUser)
+  if (users.currentUser === null && to.name === 'home') {
+    next({ name: 'sign-in' })
+  } else if (users.currentUser && (to.name === 'sign-in' || to.name === 'sign-up')) {
+    next({ name: 'home' })
+  } else {
+    next();
+  }
 })
 
 </script>
@@ -18,7 +27,7 @@ onBeforeMount(async () => {
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/auth/sign-in">Sign-in</RouterLink>
         <RouterLink to="/auth/sign-up">Sign-up</RouterLink>
-        <button @click="users._signOut(router)">Sign out</button>
+        <button @click="users._signOut()">Sign out</button>
         <button @click="users._fetchUser">Fetch user</button>
       </nav>
       

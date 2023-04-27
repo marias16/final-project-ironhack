@@ -3,8 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import AuthView from '../views/Auth/AuthView.vue'
 import SigninView from '../views/Auth/Sign-in.vue'
 import SignupView from '../views/Auth/Sign-up.vue'
-import { setupPinia } from '../stores/setuprouter.js'
-import  { useUsersStore } from '../stores/users.js'
 
 
 const router = createRouter({
@@ -36,21 +34,7 @@ const router = createRouter({
 })
 
 
-setupPinia(router) 
-const users = useUsersStore()
 
-router.beforeEach(async (to, from, next) => {
-  
-  await users._fetchUser()
-  
-  console.log(users.currentUser)
-  if (users.currentUser === null && to.name === 'home') {
-    next({ name: 'sign-in' })
-  } else if (users.currentUser && (to.name === 'sign-in' || to.name === 'sign-up')) {
-    next({ name: 'home' })
-  } else {
-    next();
-  }
-})
+
 
 export default router
