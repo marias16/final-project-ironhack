@@ -7,6 +7,7 @@ export const useUsersStore = defineStore('user', () => {
   const currentUser = ref(null)
   const email = ref('')
   const password = ref('');
+  const signedUp = ref(false)
 
 
   async function _fetchUser() {
@@ -16,7 +17,7 @@ export const useUsersStore = defineStore('user', () => {
     return currentUser
   }
 
-  async function _signIn(userEmail, userPassword) {
+  async function _signIn(userEmail, userPassword, router) {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: userEmail,
       password: userPassword,
@@ -28,11 +29,11 @@ export const useUsersStore = defineStore('user', () => {
     }
 
     currentUser.value = data;
-    console.log(currentUser.value)
+    router.push({name: 'home'})
   }
 
   async function _signUp(email, password) {
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
     })
@@ -42,20 +43,19 @@ export const useUsersStore = defineStore('user', () => {
       return
     }
 
-    console.log(data)
+    signedUp.value = true;
   }
 
-  async function _signOut() {
+  async function _signOut(router) {
     const { error } = await supabase.auth.signOut()
     if(error) {
       console.error(error)
       return
     }
     currentUser.value = null;
-    console.log(currentUser.value)
     _fetchUser()
-
+    router.push({name: 'sign-in'})
   }
 
-  return { currentUser, email, password, _fetchUser, _signIn, _signUp, _signOut } 
+  return { currentUser, email, password, signedUp, _fetchUser, _signIn, _signUp, _signOut } 
 })

@@ -1,6 +1,8 @@
 <script setup>
 import { useTasksStore } from '../stores/tasks'
+import { useUsersStore } from '../stores/users'
 const tasks = useTasksStore();
+const users = useUsersStore()
 
 </script>
 
@@ -20,7 +22,7 @@ const tasks = useTasksStore();
         </li>
     </ul>
     <input v-model="tasks.titleTask">
-    <button @click="tasks._addNewTask({title: tasks.titleTask, user_id:'d4268b82-a89e-4e9c-baac-805a28ab14a3'})">Create task</button>
+    <button @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">Create task</button>
     <h2>Done</h2>
     <ul>
         <li v-for="task in tasks.tasks" :key="task.id" v-show="task.is_complete">

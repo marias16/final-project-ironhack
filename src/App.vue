@@ -2,6 +2,7 @@
 import  { onBeforeMount }  from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import { useUsersStore } from './stores/users'
+import router from '@/router/index'
 const users = useUsersStore();
 
 onBeforeMount(async () => {
@@ -17,7 +18,7 @@ onBeforeMount(async () => {
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/auth/sign-in">Sign-in</RouterLink>
         <RouterLink to="/auth/sign-up">Sign-up</RouterLink>
-        <button @click="users._signOut">Sign out</button>
+        <button @click="users._signOut(router)">Sign out</button>
         <button @click="users._fetchUser">Fetch user</button>
       </nav>
       
