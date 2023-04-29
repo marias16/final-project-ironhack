@@ -5,10 +5,8 @@ import router from '@/router/index'
 const users = useUsersStore();
 
 router.beforeEach(async (to, from, next) => {
-  
   await users._fetchUser()
   
-  console.log(users.currentUser)
   if (users.currentUser === null && to.name === 'home') {
     next({ name: 'sign-in' })
   } else if (users.currentUser && (to.name === 'sign-in' || to.name === 'sign-up')) {
@@ -21,11 +19,6 @@ router.beforeEach(async (to, from, next) => {
 </script>
 
 <template>
-  <header>
-    <div>
-      <button @click="users._signOut(router)">Sign out</button>
-    </div>
-  </header>
   <div>
     <RouterView />
   </div>

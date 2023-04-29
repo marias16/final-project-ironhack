@@ -7,7 +7,7 @@ export const useUsersStore = defineStore('user', () => {
   const currentUser = ref(null)
   const email = ref('')
   const password = ref('');
-  const signedUp = ref(false)
+  const errorDisplay = ref('')
 
 
   async function _fetchUser() {
@@ -25,6 +25,7 @@ export const useUsersStore = defineStore('user', () => {
 
     if(error) {
       console.error(error)
+      errorDisplay.value = error
       return
     }
 
@@ -32,7 +33,7 @@ export const useUsersStore = defineStore('user', () => {
     router.push({name: 'home'})
   }
 
-  async function _signUp(email, password) {
+  async function _signUp(email, password, router) {
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -42,20 +43,23 @@ export const useUsersStore = defineStore('user', () => {
       console.error(error)
       return
     }
-
-    signedUp.value = true;
+    router.push({name: 'check-email'})
   }
 
   async function _signOut(router) {
     const { error } = await supabase.auth.signOut()
+    
     if(error) {
       console.error(error)
       return
     }
-    currentUser.value = null;
-    _fetchUser()
+
+    password.value = ''
+    email.value = ''
+    errorDisplay.value = ''
+
     router.push({name: 'sign-in'})
   }
 
-  return { currentUser, email, password, signedUp, _fetchUser, _signIn, _signUp, _signOut } 
+  return { currentUser, email, password,  _fetchUser, _signIn, _signUp, _signOut, errorDisplay } 
 })

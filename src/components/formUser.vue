@@ -31,9 +31,9 @@ const confirmPassword = computed(() => {
 
 function signUpUser() {
     startValidation.value = true
-    
+
     if (validateEmail.value === true && validatePassword.value === true && confirmPassword.value === true) {
-        users._signUp(users.email, users.password)
+        users._signUp(users.email, users.password, router)
         return
     }
 }
@@ -42,17 +42,21 @@ function signUpUser() {
 
 <template>
     <div class="form">
-        <label for="email">Email</label> 
-        <input id="email" v-model="users.email" type="email"> 
-        <p v-if="validateEmail === false"> Email format not valid </p>
-        <label for="password">Password</label>
-        <input id="password" v-model="users.password" type="password">
-        <p v-if="validatePassword === false"> Password is not strong enough </p>
+        <p>{{ users.errorDisplay }}</p>
+        <div>
+            <label for="email">Email</label> 
+            <input id="email" v-model="users.email" type="email"> 
+            <p v-if="validateEmail === false" class="feedback"> Email format not valid </p>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input id="password" v-model="users.password" type="password">
+            <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, una mayúscula, una minúscula y un número. </p>
+        </div>
         <div v-show="isSignUp">
             <label for="confirm">Confirm your password</label>
             <input id="confirm" v-model="confirm" type="password">
-            <p v-show="confirmPassword === false"> Password doesn't match </p>
-
+            <p v-show="confirmPassword === false" class="feedback"> Password doesn't match </p>
         </div>
 
         <button v-if="!isSignUp" @click="users._signIn(users.email , users.password, router)">Sign in</button>
@@ -68,6 +72,7 @@ function signUpUser() {
         margin: 0;
         padding: 0;
         width: 100%;
+        gap: 1em;
     }
 
     input {
@@ -81,5 +86,10 @@ function signUpUser() {
         color: white;
         border: none;
         cursor: pointer;
+    }
+
+    .feedback {
+        font-size: 0.9em;
+        color: orange;
     }
 </style>

@@ -9,6 +9,5 @@
 </script>
 
 <template>
-  <h1>Simpel.</h1>
   <showTasks />
 </template>
