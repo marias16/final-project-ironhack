@@ -13,6 +13,6 @@
 </script>
 
 <template>
-  <h1>Home view</h1>
+  <h1>Simpel.</h1>
   <showTasks />
 </template>

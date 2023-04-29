@@ -1,16 +1,17 @@
 <script setup>
+import formUser from '@/components/formUser.vue'
+import buttonForm from '@/components/buttonForm.vue'
 import { useUsersStore } from '@/stores/users'
-import  router  from '@/router/index'
+import { RouterLink } from 'vue-router'
+
 const users = useUsersStore();
 
 </script>
 
 <template>
-  <p>sign up view</p>
-  <p v-if="users.signedUp">Please check your email</p>
-  <label for="email">Email</label>
-  <input id="email" v-model="users.email" type="email">
-  <label for="email">Password</label>
-  <input v-model="users.password" type="password">
-  <button @click="users._signUp(users.email, users.password, router)">Sign up</button>
+    <h2>Create an account</h2>
+    <p v-if="users.signedUp">Please check your email</p>
+    <formUser />
+    <buttonForm />
+    <p>Already have an account? <RouterLink to="/auth/sign-in"> Log in </RouterLink></p>
 </template>

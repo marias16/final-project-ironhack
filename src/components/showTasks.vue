@@ -1,43 +1,36 @@
 <script setup>
 import { useTasksStore } from '../stores/tasks'
 import { useUsersStore } from '../stores/users'
+import  taskElement  from './taskElement.vue'
+
 const tasks = useTasksStore();
 const users = useUsersStore()
 
 </script>
 
 <template>
-    <h1>This is the show tasks component</h1>
-    <h2>To-Do</h2>
-    <p v-if="tasks._incompleteTasks === 0"> Congrats! You completed all tasks </p>
+    <h2>To-Do ({{ tasks._incompleteTasks.length }})</h2>
+    <p v-if="tasks._incompleteTasks.length === 0"> Congrats! You completed all tasks </p>
     <ul>
-        <li v-for="task in tasks.tasks" :key="task.id" v-show="!task.is_complete">
-            <input type="checkbox" :checked="task.is_complete" @change="tasks._updateStatus(task, $event.target.checked)">
-            <input v-if="tasks.editMode && tasks.editTaskId === task.id" v-model="task.title">
-            <span v-else>{{  task.title }}</span>
-            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks._updateTitle(task)">Save</button>
-            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks.editMode = false" >Cancel</button>
-            <button v-else @click="tasks._editTask(task.id)">Edit task</button>
-            <button @click="tasks._deleteTask(task.id)">Delete task</button>
-        </li>
+        <taskElement v-for="task in tasks._incompleteTasks" :key="task.id" :task="task" />
     </ul>
     <input v-model="tasks.titleTask">
     <button @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">Create task</button>
-    <h2>Done</h2>
+    <h2>Done ({{ tasks._completeTasks.length }})</h2>
     <ul>
-        <li v-for="task in tasks.tasks" :key="task.id" v-show="task.is_complete">
-            <input type="checkbox" :checked="task.is_complete" @change="tasks._updateStatus(task, $event.target.checked)">
-            <input v-if="tasks.editMode && tasks.editTaskId === task.id" v-model="task.title">
-            <span v-else>{{  task.title }}</span>
-            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks._updateTitle(task)">Save</button>
-            <button v-if="tasks.editMode && tasks.editTaskId === task.id" @click="tasks.editMode = false" >Cancel</button>
-            <button v-else @click="tasks._editTask(task.id)">Edit task</button>
-            <button @click="tasks._deleteTask(task.id)">Delete task</button>
-        </li>
+        <taskElement v-for="task in tasks._completeTasks" :key="task.id" :task="task" />
     </ul>
     
 </template>
 
 <style scoped>
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
 </style>
 

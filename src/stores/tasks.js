@@ -93,8 +93,9 @@ export const useTasksStore = defineStore('tasksList', () => {
 
   //calculate incomplete tasks
 
-  const _incompleteTasks = computed(() => tasks.value.filter(task => task.is_complete === false).length)
- 
+  const _incompleteTasks = computed(() => tasks.value.filter(task => task.is_complete === false))
+  const _completeTasks = computed(() => tasks.value.filter(task => task.is_complete === true))
+  
 
-  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus, _incompleteTasks } 
+  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus, _incompleteTasks, _completeTasks } 
 })
