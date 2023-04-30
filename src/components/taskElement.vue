@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 import { useTasksStore } from '@/stores/tasks.js'
 
 defineProps({

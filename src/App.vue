@@ -28,12 +28,14 @@ router.beforeEach(async (to, from, next) => {
 
   div {
       background: white;
-      width: 50%;
+      max-width: 30%;
       padding: 2em 3em;
       margin: auto auto;
       display: flex;
       flex-direction: column;
       gap: 2em;
+      border-radius: 50px;
+      box-shadow: 1px black;
   }
   
 

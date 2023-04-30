@@ -39,8 +39,10 @@ function toggleDone () {
 
     <div>
         <input v-model="tasks.titleTask">
-        <button @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">Create task</button>
+        <button class="btn btn-accent btn-outline" @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">Create task</button>
     </div>
+
+
     <h2 @click="toggleDone">Done ({{ tasks._completeCount }})</h2>
     <ul v-show="doneShow">
         <taskElement v-for="task in tasks._completeTasks" :key="task.id" :task="task" />
