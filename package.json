@@ -10,11 +10,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@iconscout/vue-unicons": "^1.0.2",
     "@supabase/supabase-js": "^2.20.0",
     "pinia": "^2.0.32",
     "pinia-plugin-persist": "^1.0.0",
     "tailwind": "^4.0.0",
     "vue": "^3.2.47",
+    "vue-awesome": "^4.5.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
