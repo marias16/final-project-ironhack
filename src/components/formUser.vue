@@ -56,7 +56,7 @@ function signUpUser() {
         <div v-show="isSignUp">
             <label for="confirm">Confirm your password</label>
             <input class="input input-bordered w-full max-w-xs" id="confirm" v-model="confirm" type="password">
-            <p v-show="confirmPassword === false" class="feedback"> Password doesn't match </p>
+            <p v-if="confirmPassword === false" class="feedback"> Password doesn't match </p>
         </div>
 
         <button class="btn btn-primary" v-if="!isSignUp" @click="users._signIn(users.email , users.password, router)">Sign in</button>

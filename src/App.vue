@@ -28,7 +28,7 @@ router.beforeEach(async (to, from, next) => {
 
   div {
       background: white;
-      max-width: 55%;
+      max-width: 58%;
       padding: 2em 3em;
       margin: auto auto;
       display: flex;

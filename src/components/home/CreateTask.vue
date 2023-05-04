@@ -11,7 +11,7 @@ const users = useUsersStore()
 <template>
     <div class="input-group">
         <input v-model="tasks.titleTask" placeholder="What do you want to do?" class="input input-bordered" @keyup.enter="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})"/>
-        <button class="btn" @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">
+        <button class="btn btn-accent" @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">
             <p>Add</p>
         </button>
     </div>

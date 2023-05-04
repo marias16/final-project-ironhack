@@ -10,8 +10,8 @@ const tasks = useTasksStore()
 </script>
 
 <template>
-    <li class="task-container-edit" v-if="tasks.editMode && tasks.editTaskId === task.id">
-            <div class="input-group">
+    <li class="task-container-edit task" v-if="tasks.editMode && tasks.editTaskId === task.id">
+            <div class="input-group group-div">
                 <input  v-model="task.title" class="input input-bordered" >
                 <button class="btn btn-success" @click="tasks._updateTitle(task)">
                     Save
@@ -20,7 +20,7 @@ const tasks = useTasksStore()
             <button class="btn btn-ghost" @click="tasks.editMode = false"> Cancel </button>
     </li>
 
-    <li class="task-container" v-else>
+    <li class="task task-container" v-else>
         <div class="name">
             <input class="checkbox checkbox-accent" type="checkbox" :checked="task.is_complete" @change="tasks._updateStatus(task, $event.target.checked)">
             <span>{{  task.title }}</span>
@@ -43,20 +43,28 @@ const tasks = useTasksStore()
 </template>
 
 <style scoped>
+
+    .task {
+        box-sizing: border-box;
+        border-radius: 1em;
+        padding: 1em 0.2em 1em 1em;
+    }
+
+    .task:hover {
+        background-color: rgb(49, 54, 65, 0.1)
+        
+    }
     .task-container {
         display: grid;
         grid-template-columns: 4fr 1fr;
         justify-content: space-between;
-        height: 2em;
         width: 100%;
-        padding: 0.5em 0.5em;
     }
 
     .task-container-edit {
         display: grid;
-        grid-template-columns: 4fr 1fr;
+        grid-template-columns: 4fr 2fr;
     }
-
 
     .name {
         display: grid;
@@ -71,5 +79,6 @@ const tasks = useTasksStore()
     .delete {
         color:crimson
     }
+
 
 </style>
