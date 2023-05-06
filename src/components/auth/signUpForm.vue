@@ -4,21 +4,27 @@ import { useUsersStore } from '@/stores/users'
 import router from '@/router/index'
 
 const users = useUsersStore();
-const isSignUp = computed(() => {
-  return router.currentRoute.value.name === 'sign-up'
-})
+users.password = ''
+users.email = ''
 
+//button disabled 
+const emptyFields = computed(() => {
+    return {
+        'btn btn-accent': users.password && users.email && confirm,
+        'btn btn-disabled' : !users.password || !users.email || !confirm.value,
+    }
+})
 
 //form validation
 const startValidation = ref(false)
 
 //computed for evaluating if validations are true or false
 const validateEmail = computed(() => {
-    return  startValidation.value === true ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(users.email) : null;
+    return  startValidation.value === true ? (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(users.email) : null;
 })
 
 const validatePassword = computed(() => {
-    return startValidation.value === true ? /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/.test(users.password) : null;
+    return startValidation.value === true ? (/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/).test(users.password) : null;
 })
 
 const confirm = ref('')
@@ -38,29 +44,29 @@ function signUpUser() {
     }
 }
 
+
+
 </script>
 
 <template>
     <div class="form">
-        <p>{{ users.errorDisplay }}</p>
         <div>
             <label for="email">Email</label> 
-            <input class="input input-bordered w-full max-w-xs" id="email" v-model="users.email" type="email"> 
+            <input class="input input-bordered w-full max-w-xl" id="email" :class="{'not-validated': startValidation && !validateEmail}" v-model="users.email" type="email" placeholder="myemail@domain.com"> 
             <p v-if="validateEmail === false" class="feedback"> Email format not valid </p>
         </div>
         <div>
             <label for="password">Password</label>
-            <input class="input input-bordered w-full max-w-xs" id="password" v-model="users.password" type="password">
-            <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, una mayúscula, una minúscula y un número. </p>
+            <input class="input input-bordered w-full max-w-xl" id="password" :class="{'not-validated': startValidation && !validatePassword}" v-model="users.password" type="password" placeholder="make sure it's strong">
+            <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, a capital letter and a number. </p>
         </div>
-        <div v-show="isSignUp">
+        <div>
             <label for="confirm">Confirm your password</label>
-            <input class="input input-bordered w-full max-w-xs" id="confirm" v-model="confirm" type="password">
+            <input class="input input-bordered w-full max-w-xl" id="confirm" :class="{'not-validated': startValidation && !confirmPassword}" v-model="confirm" type="password" placeholder="repeat the password">
             <p v-if="confirmPassword === false" class="feedback"> Password doesn't match </p>
         </div>
 
-        <button class="btn btn-primary" v-if="!isSignUp" @click="users._signIn(users.email , users.password, router)">Sign in</button>
-        <button class="btn btn-primary" v-else @click="signUpUser()">Sign up</button>
+        <button :class="emptyFields" @click="signUpUser()">Sign up</button>
     </div>
 </template>
 
@@ -68,10 +74,9 @@ function signUpUser() {
     .form {
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-start;
         margin: 0;
         padding: 0;
-        width: 100%;
         gap: 1em;
     }
 
@@ -81,21 +86,12 @@ function signUpUser() {
         gap: 0.5em;
     }
 
-    input {
-        width: 100%;
-    }
-
-    .meh {
-        width: 100%;
-        height: 2em;
-        background: navy;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-
     .feedback {
         font-size: 0.9em;
-        color: orange;
+        color: #F87272;
+    }
+
+    .not-validated {
+        background-color: rgb(248, 114, 114, 0.2)
     }
 </style>

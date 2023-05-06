@@ -6,11 +6,12 @@
 @tailwind variants;
 
 
+
 #app {
   max-width: 1280px;
   height:fit-content;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0rem;
   font-weight: normal;
 }
 

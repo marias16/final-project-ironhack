@@ -18,9 +18,15 @@ const users = useUsersStore()
 </template>
 
 <style scoped>
-div {
-    display: grid;
-    grid-template-columns: 5fr 2fr;
-}
+    div {
+        display: grid;
+        grid-template-columns: 5fr 2fr;
+    }
+
+    @media (max-width: 480px) {
+        div {
+            display: none;
+        }
+    }
 
 </style>
