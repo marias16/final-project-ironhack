@@ -6,6 +6,7 @@ import SignupView from '../views/Auth/Sign-up.vue'
 import CheckView from '../views/Auth/Check-email.vue'
 import CreateTask from '../views/Home/CreatetaskView.vue'
 import HomeCentral from '../views/Home/HomeCentral.vue'
+import EditTask from '../views/Home/EditTaskView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,7 +17,7 @@ const router = createRouter({
       component: HomeCentral,
       children: [
         {
-          path: 'home',
+          path: '/',
           name: 'home',
           component: HomeView,
         },
@@ -24,7 +25,15 @@ const router = createRouter({
           path: 'create-task',
           name: 'create-task',
           component: CreateTask,
-        }
+        },
+        {
+          path: 'edit-task/:id',
+          name: 'edit-task',
+          component: EditTask,
+          params: {
+          id: '',
+          },
+        },
       ]
     },
 

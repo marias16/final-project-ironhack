@@ -36,28 +36,26 @@ router.beforeEach(async (to, from, next) => {
     div {
       max-width: 80%;
       min-width: 70%;
-      padding: 2em 3em;
+      padding: 1em 1.5em;
     }
   }
 
   @media only screen and (min-width: 768px) and (max-width: 1400px){
     div {
-      width: 55%;
-      -webkit-box-shadow: -2px 8px 16px 7px rgba(0,0,0,0.19); 
-      box-shadow: -2px 8px 16px 7px rgba(0,0,0,0.19);
-      padding: 2em 3em;
+      width: 60%;
+      padding: 1em 0;
     }
   }
 
   div {
       background: white;
-      
       margin: auto auto;
       display: flex;
       flex-direction: column;
       gap: 2em;
-      border-radius: 50px;
-      
+      border-radius: 5%;
+      margin-left: auto;
+      margin-right: auto;
   }
   
 

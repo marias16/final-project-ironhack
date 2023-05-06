@@ -66,7 +66,7 @@ function signUpUser() {
             <p v-if="confirmPassword === false" class="feedback"> Password doesn't match </p>
         </div>
 
-        <button :class="emptyFields" @click="signUpUser()">Sign up</button>
+        <button class="btn w-full max-w-xl" :class="emptyFields" @click="signUpUser()">Sign up</button>
     </div>
 </template>
 

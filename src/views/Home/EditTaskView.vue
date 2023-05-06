@@ -1,23 +1,26 @@
 <script setup>
 import router from '@/router/index'
+import { useRoute } from 'vue-router'
 import { useTasksStore } from '@/stores/tasks'
-import { useUsersStore } from '@/stores/users'
 
 const tasks = useTasksStore();
-const users = useUsersStore()
+const route = useRoute()
+const idTask =  route.params.id 
+const thisTask = tasks.tasks.filter(task => idTask == task.id)[0]
+console.log(thisTask)
 
-async function addAndGo () {
-    await tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})
+async function editAndGo () {
+    await tasks._updateTitle(thisTask)
     await router.push({name: 'home'})
 }
 
 </script>
 
 <template>
-    <h2>Create your task.</h2>
-    <input type="text" class="input input-bordered" v-model="tasks.titleTask" placeholder="Ex. Do the dishes"> 
+    <h2>Edit your task</h2>
+    <input type="text" class="input input-bordered" v-model="thisTask.title" placeholder="Ex. Do the dishes"> 
     <section>
-        <button class="btn btn-accent" @click="addAndGo">ADD</button>
+        <button class="btn btn-accent" @click="editAndGo">SAVE</button>
         <button class="btn btn-ghost" @click="router.push({name: 'home'})">Back</button>
     </section>
     
