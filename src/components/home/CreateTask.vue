@@ -1,17 +1,20 @@
 <script setup>
 import { useTasksStore } from '@/stores/tasks'
 import { useUsersStore } from '@/stores/users'
-
+import { ref, computed } from 'vue'
 const tasks = useTasksStore();
 const users = useUsersStore()
 
-
+const focusInput = ref(false)
+const emptyField = computed(() => {
+    return (tasks.titleTask === '' && focusInput.value === false) || (tasks.titleTask !== '') ? false : true; 
+})
 </script>
 
 <template>
     <div class="input-group">
-        <input v-model="tasks.titleTask" placeholder="What do you want to do?" class="input input-bordered" @keyup.enter="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})"/>
-        <button class="btn btn-accent" @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">
+        <input v-model="tasks.titleTask" @focus="focusInput = true" @blur="focusInput = false" placeholder="What do you want to do?" class="input input-bordered" @keyup.enter="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})"/>
+        <button class="btn btn-accent" :class="{'btn-disabled': emptyField}" @click="tasks._addNewTask({title: tasks.titleTask, user_id: users.currentUser.id})">
             <p>Add</p>
         </button>
     </div>

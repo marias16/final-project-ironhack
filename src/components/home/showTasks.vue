@@ -5,7 +5,7 @@ import  taskElement  from './taskElement.vue'
 import AlertSuccess from './AlertSuccess.vue'
 
 const tasks = useTasksStore();
-
+tasks._fetchAllTasks();
 const doneShow = ref(false)
 
 watch(() => tasks._completeCount, (currentValue, oldValue) => {
@@ -70,6 +70,7 @@ function toggleDone () {
     .toggle-down {
         display: flex;
         gap: 0.5em;
+        cursor: pointer;
     }
 
     .rotate  {
