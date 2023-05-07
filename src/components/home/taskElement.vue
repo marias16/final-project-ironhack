@@ -80,7 +80,7 @@ function handleEdit(taskElement) {
         } 
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 860px) {
         .task-container-edit {
         grid-template-columns: 4fr 1fr 1fr;
         }
