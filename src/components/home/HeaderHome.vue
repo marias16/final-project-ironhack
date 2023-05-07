@@ -6,11 +6,11 @@ import  router  from '@/router/index'
 
 function hide () {
     const route = useRoute()
-    if (route.name === ('create-task' || 'edit-task')) {
-        return false
+    if (route.name === 'home') {
+        return true
     }
 
-    return true
+    return false
 }
 
 </script>

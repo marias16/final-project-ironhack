@@ -7,6 +7,5 @@ tasks._fetchAllTasks();
 </script>
 
 <template>
-    <headerHome />
     <RouterView></RouterView>
 </template>
