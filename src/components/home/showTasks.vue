@@ -70,6 +70,7 @@ function toggleDone () {
     .toggle-down {
         display: flex;
         gap: 0.5em;
+        cursor: pointer;
     }
 
     .rotate  {
