@@ -42,7 +42,7 @@ router.beforeEach(async (to, from, next) => {
 
   @media only screen and (min-width: 768px) and (max-width: 1400px){
     div {
-      width: 60%;
+      width: 55%;
       padding: 1em 0;
     }
   }

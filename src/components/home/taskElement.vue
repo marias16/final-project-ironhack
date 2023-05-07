@@ -74,7 +74,7 @@ function handleEdit(taskElement) {
         width: 100%;
     }
 
-    @media screen and (min-width: 481px) and (max-width: 767px){
+    @media screen and (min-width: 481px) and (max-width: 860px){
         .task-container-edit {
             grid-template-rows: 1fr 1fr 1fr;
         } 

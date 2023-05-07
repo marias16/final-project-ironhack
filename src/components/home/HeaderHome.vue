@@ -6,8 +6,7 @@ import  router  from '@/router/index'
 
 function hide () {
     const route = useRoute()
-    console.log(route.name)
-    if (route.name === 'create-task') {
+    if (route.name === ('create-task' || 'edit-task')) {
         return false
     }
 
