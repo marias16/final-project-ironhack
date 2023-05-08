@@ -25,7 +25,7 @@ tasks._fetchAllTasks();
 </script>
 
 <template>
-  <div>
+  <div >
     <HeaderHome />
     <RouterView />
   </div>
@@ -35,34 +35,26 @@ tasks._fetchAllTasks();
   @media (max-width: 480px){
     div {
       width: 100%;
-      padding: 1em 1.5em;
     }
   }
 
   @media screen and (min-width: 481px) and (max-width: 767px){
     div {
-      max-width: 80%;
-      min-width: 70%;
-      padding: 1em 1.5em;
+      max-width: 80vh;
+      min-width: 70vh;
     }
   }
 
   @media only screen and (min-width: 768px) and (max-width: 1400px){
     div {
-      width: 55%;
-      padding: 1em 0;
+      width: 100vh;
     }
   }
 
   div {
       background: white;
-      margin: auto auto;
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: 2em;
-      border-radius: 5%;
-      margin-left: auto;
-      margin-right: auto;
   }
   
 

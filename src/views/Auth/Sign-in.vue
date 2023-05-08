@@ -8,11 +8,11 @@ import { RouterLink } from 'vue-router'
 <template>
     
     <section>
-        <h2>Welcome back</h2>
+        <h2>Welcome back.</h2>
         <p>Log in to your account and get access to your simpel tasks.</p>
     </section>
     <signInForm />
-    <p><span>Don't have an account? </span><RouterLink to="/auth/sign-up" class="link link-accent"> Create one </RouterLink></p>
+    <p><span>Don't have an account? </span><RouterLink to="/auth/sign-up" class="link link-accent">Create one. </RouterLink></p>
 </template>
 
 <style scoped>
