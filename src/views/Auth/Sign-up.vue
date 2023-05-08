@@ -14,7 +14,7 @@ import { RouterLink } from 'vue-router'
         <p>A <strike>simple</strike> simpel to-do app, now available for everybody.</p>
     </section>
     <signUpForm />
-    <p class="redirect"><span>Already have an account?</span> <RouterLink to="/auth/sign-in" class="link link-accent"> Log in </RouterLink></p>
+    <p class="redirect"><span>Already have an account?</span> <RouterLink to="/auth/sign-in" class="link link-accent"> Log in. </RouterLink></p>
 </template>
 
 
