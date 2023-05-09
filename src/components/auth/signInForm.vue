@@ -33,12 +33,12 @@ async function signInHandler () {
         </div>
         <div class="input-field">
             <label for="email">Email</label> 
-            <input class="input input-bordered w-full max-w-xl" id="email" v-model="users.email" type="email"> 
+            <input class="input input-bordered w-full max-w-xl" id="email" v-model="users.email" type="email" @keyup.enter="signInHandler"> 
             <p v-if="validateEmail === false" class="feedback"> Email format not valid </p>
         </div>
         <div class="input-field">
             <label for="password">Password</label>
-            <input class="input input-bordered w-full max-w-xl" id="password" v-model="users.password" type="password">
+            <input class="input input-bordered w-full max-w-xl" id="password" v-model="users.password" type="password" @keyup.enter="signInHandler">
             <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, una mayúscula, una minúscula y un número. </p>
         </div>
         

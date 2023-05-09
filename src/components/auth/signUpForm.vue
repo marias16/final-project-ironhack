@@ -53,17 +53,17 @@ async function handleSignUp() {
     <div class="form">
         <div>
             <label for="email">Email</label> 
-            <input class="input input-bordered w-full max-w-xl" id="email" :class="{'not-validated': startValidation && !validateEmail}" v-model="users.email" type="email" placeholder="myemail@domain.com"> 
+            <input class="input input-bordered w-full max-w-xl" id="email" :class="{'not-validated': startValidation && !validateEmail}" v-model="users.email" type="email" placeholder="myemail@domain.com" @keyup.enter="signUpHandler"> 
             <p v-if="validateEmail === false" class="feedback"> Email format not valid </p>
         </div>
         <div>
             <label for="password">Password</label>
-            <input class="input input-bordered w-full max-w-xl" id="password" :class="{'not-validated': startValidation && !validatePassword}" v-model="users.password" type="password" placeholder="make sure it's strong">
+            <input class="input input-bordered w-full max-w-xl" id="password" :class="{'not-validated': startValidation && !validatePassword}" v-model="users.password" type="password" placeholder="make sure it's strong" @keyup.enter="signUpHandler">
             <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, a capital letter and a number. </p>
         </div>
         <div>
             <label for="confirm">Confirm your password</label>
-            <input class="input input-bordered w-full max-w-xl" id="confirm" :class="{'not-validated': startValidation && !confirmPassword}" v-model="confirm" type="password" placeholder="repeat the password">
+            <input class="input input-bordered w-full max-w-xl" id="confirm" :class="{'not-validated': startValidation && !confirmPassword}" v-model="confirm" type="password" placeholder="repeat the password" @keyup.enter="signUpHandler">
             <p v-if="confirmPassword === false" class="feedback"> Password doesn't match </p>
         </div>
 
