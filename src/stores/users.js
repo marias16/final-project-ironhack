@@ -25,7 +25,10 @@ export const useUsersStore = defineStore('user', () => {
 
     if(error) {
       console.error(error)
-      errorDisplay.value = 'Invalid login credentials. Please, try again.'
+      const errorString = error.toString()
+      console.log(errorString)
+      errorDisplay.value = errorString.split(': ')[1]
+      console.log(errorDisplay.value)
       return
     }
 

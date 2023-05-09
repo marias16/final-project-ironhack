@@ -78,13 +78,13 @@ function handleEdit(taskElement) {
         width: 100%;
     }
 
-    @media screen and (min-width: 481px) and (max-width: 860px){
+    @media screen and (min-width: 481px) and (max-width: 482px){
         .task-container-edit {
             grid-template-rows: 1fr 1fr 1fr;
         } 
     }
 
-    @media screen and (min-width: 860px) {
+    @media screen and (min-width: 482px) {
         .task-container-edit {
         grid-template-columns: 4fr 1fr 1fr;
         }
@@ -105,6 +105,7 @@ function handleEdit(taskElement) {
     .centered {
         display: flex;
         justify-content: center;
+        cursor: pointer;
 
     }
     .delete {

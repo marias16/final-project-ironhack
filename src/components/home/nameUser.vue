@@ -19,6 +19,10 @@ h2 {
 }
 
 span {
+    transition: all 0.35s ease-in-out;
+}
+
+span:hover {
     color: #2AA69A;
 }
 </style>
