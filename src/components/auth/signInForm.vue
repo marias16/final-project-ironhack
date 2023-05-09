@@ -15,14 +15,20 @@ const emptyFields = computed(() => {
     }
 })
 
+async function signInHandler () {
+    await users._signIn(users.email , users.password)
+    await router.push({name: 'home'})
+}
+
+
 </script>
 
 <template>
     <div class="form">
-        <div class="alert alert-error shadow-lg" v-if="errorDisplay">
+        <div class="alert alert-error shadow-lg" v-if="users.errorDisplay">
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>{{ users.errorDisplay }}</span>
+            <span> {{ users.errorDisplay}}. Please, try again. </span>
           </div>
         </div>
         <div class="input-field">
@@ -36,13 +42,13 @@ const emptyFields = computed(() => {
             <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, una mayúscula, una minúscula y un número. </p>
         </div>
         
-        <button class="btn w-full max-w-xl" :class="emptyFields" @click="users._signIn(users.email , users.password, router)">Sign in</button>
+        <button class="btn w-full max-w-xl" :class="emptyFields" @click="signInHandler">Sign in</button>
     </div>
 </template>
 
 <style scoped>
     .form {
-        width: 100%;
+        width: 90%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;

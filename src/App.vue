@@ -25,33 +25,39 @@ tasks._fetchAllTasks();
 </script>
 
 <template>
-  <div >
-    <HeaderHome />
-    <RouterView />
+  <div class="container">
+    <div></div>
+    <section class="main">
+      <HeaderHome />
+      <RouterView />
+    </section>
+    <div></div>
   </div>
+  
 </template>
 
 <style scoped>
   @media (max-width: 480px){
-    div {
+    .main {
       width: 100%;
     }
   }
 
-  @media screen and (min-width: 481px) and (max-width: 767px){
-    div {
-      max-width: 80vh;
-      min-width: 70vh;
+  @media screen and (min-width: 481px) and (max-width: 1099px){
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 7fr 1fr;
     }
   }
 
-  @media only screen and (min-width: 768px) and (max-width: 1400px){
-    div {
-      width: 100vh;
+  @media only screen and (min-width: 1100px) and (max-width: 1920px){
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
     }
   }
 
-  div {
+  .main {
       background: white;
       display: grid;
       gap: 2em;

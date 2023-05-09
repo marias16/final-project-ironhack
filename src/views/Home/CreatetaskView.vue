@@ -27,7 +27,6 @@ async function addAndGo () {
 
 h2 {
     font-weight: bolder;
-    font-size: 1em;
  }
 
  section {

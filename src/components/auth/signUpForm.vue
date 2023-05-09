@@ -35,11 +35,12 @@ const confirmPassword = computed(() => {
 
 //function for validation
 
-function signUpUser() {
+async function handleSignUp() {
     startValidation.value = true
 
     if (validateEmail.value === true && validatePassword.value === true && confirmPassword.value === true) {
-        users._signUp(users.email, users.password, router)
+        await users._signUp(users.email, users.password)
+        await router.push({name: 'check-email'})
         return
     }
 }
@@ -66,7 +67,7 @@ function signUpUser() {
             <p v-if="confirmPassword === false" class="feedback"> Password doesn't match </p>
         </div>
 
-        <button class="btn w-full max-w-xl" :class="emptyFields" @click="signUpUser()">Sign up</button>
+        <button class="btn w-full max-w-xl" :class="emptyFields" @click="handleSignUp">Sign up</button>
     </div>
 </template>
 

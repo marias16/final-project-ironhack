@@ -17,23 +17,22 @@ export const useUsersStore = defineStore('user', () => {
     return currentUser
   }
 
-  async function _signIn(userEmail, userPassword, router) {
+  async function _signIn(userEmail, userPassword) {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: userEmail,
       password: userPassword,
     })
 
     if(error) {
-      console.error(error)
-      errorDisplay.value = 'Invalid login credentials. Please, try again.'
+      const errorString = error.toString()
+      errorDisplay.value = errorString.split(': ')[1]
       return
     }
 
     currentUser.value = data;
-    router.push({name: 'home'})
   }
 
-  async function _signUp(email, password, router) {
+  async function _signUp(email, password) {
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -43,10 +42,10 @@ export const useUsersStore = defineStore('user', () => {
       console.error(error)
       return
     }
-    router.push({name: 'check-email'})
+    
   }
 
-  async function _signOut(router) {
+  async function _signOut() {
     const { error } = await supabase.auth.signOut()
     
     if(error) {
@@ -57,8 +56,6 @@ export const useUsersStore = defineStore('user', () => {
     password.value = ''
     email.value = ''
     errorDisplay.value = ''
-
-    router.push({name: 'sign-in'})
   }
 
   return { currentUser, email, password,  _fetchUser, _signIn, _signUp, _signOut, errorDisplay } 

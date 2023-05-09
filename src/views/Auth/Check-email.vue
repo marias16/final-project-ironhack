@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 
 <template>
     <section>
-        <h2>We've just sent you an email</h2>
+        <h2>We've just sent you an email.</h2>
         <p>Please, confirm your email address to begin your Simpel journey.<br>
         Or <RouterLink to="/auth/sign-in" class="link link-accent"> take me to sign in. </RouterLink></p>
     </section>
