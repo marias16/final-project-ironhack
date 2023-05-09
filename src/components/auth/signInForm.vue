@@ -15,6 +15,12 @@ const emptyFields = computed(() => {
     }
 })
 
+async function signInHandler () {
+    await users._signIn(users.email , users.password)
+    await router.push({name: 'home'})
+}
+
+
 </script>
 
 <template>
@@ -36,7 +42,7 @@ const emptyFields = computed(() => {
             <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, una mayúscula, una minúscula y un número. </p>
         </div>
         
-        <button class="btn w-full max-w-xl" :class="emptyFields" @click="users._signIn(users.email , users.password, router)">Sign in</button>
+        <button class="btn w-full max-w-xl" :class="emptyFields" @click="signInHandler">Sign in</button>
     </div>
 </template>
 

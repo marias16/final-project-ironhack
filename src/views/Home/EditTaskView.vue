@@ -7,7 +7,6 @@ const tasks = useTasksStore();
 const route = useRoute()
 const idTask =  route.params.id 
 const thisTask = tasks.tasks.filter(task => idTask == task.id)[0]
-console.log(thisTask)
 
 async function editAndGo () {
     await tasks._updateTitle(thisTask)
