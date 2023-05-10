@@ -16,24 +16,27 @@ const screenMobile = computed(() => {
 
 function handleEdit(taskElement) {
     if(screenMobile.value === false) {
-        tasks._editTask(taskElement.id)
+        tasks._editTask(taskElement)
         return
     }
 
     router.push({path: `/index/edit-task/ ${taskElement.id}`})
 }
 
+const emptyTask = computed(() => {
+    return {
+        'btn btn-accent': tasks.titleOfEdit,
+        'btn btn-disabled' : tasks.titleOfEdit.length < 4,
+    }
+})
 
 </script>
 
 <template >
-    <div>
-
-    </div>
     <li class="task-container-edit task" v-if="tasks.editMode && tasks.editTaskId === task.id">
-            <input  v-model="task.title" class="input input-bordered" >
-            <button class="btn btn-success" @click="tasks._updateTitle(task)"> Save </button>
-            <button class="btn btn-ghost" @click="tasks.editMode = false"> Cancel </button>
+            <input  v-model="tasks.titleOfEdit" class="input input-bordered" >
+            <button :class="emptyTask" @click="tasks._updateTitle(task)"> Save </button>
+            <button class="btn btn-ghost" @click="tasks._handleCancel"> Cancel </button>
     </li>
 
     <li class="task task-container" v-else>
@@ -50,8 +53,12 @@ function handleEdit(taskElement) {
                     Edit name
                     </a></li>
                 <li class="delete" @click="tasks._deleteTask(task.id)"><a>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                     Delete task
+                </a></li>
+                <li class="delete" v-show="task.is_complete === true && tasks._completeCount >= 3" @click="tasks._deleteAllDoneTasks"><a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    Delete all done
                 </a></li>
             </ul>
         </div>
@@ -64,10 +71,9 @@ function handleEdit(taskElement) {
         box-sizing: border-box;
         border-radius: 1em;
         padding: 1em 0.2em 1em 1em;
-        transition: all 0.35s ease-in-out;
+        transition: 0.35s ease-in-out;
     }
 
-    /*test*/
     .task:hover {
         background-color: #E8E9EB;
     }

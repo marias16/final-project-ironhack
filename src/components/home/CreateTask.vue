@@ -7,7 +7,7 @@ const users = useUsersStore()
 
 const focusInput = ref(false)
 const emptyField = computed(() => {
-    return (tasks.titleTask === '' && focusInput.value === false) || (tasks.titleTask !== '') ? false : true; 
+    return (focusInput.value === false) || (tasks.titleTask.length > 4) ? false : true; 
 })
 </script>
 

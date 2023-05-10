@@ -11,9 +11,9 @@ const users = useUsersStore();
 router.beforeEach(async (to, from, next) => {
   await users._fetchUser()
   
-  if (users.currentUser === null && to.name === 'home') {
+  if (users.currentUser === null && (to.name === 'home' || to.name ==='home-central' || to.name ==='edit-task' || to.name ==='create-task')) {
     next({ name: 'sign-in' })
-  } else if (users.currentUser && (to.name === 'sign-in' || to.name === 'sign-up')) {
+  } else if (users.currentUser && (to.name === 'sign-in' || to.name === 'sign-up' || to.name === 'check-email' || to.name === 'auth')) {
     next({ name: 'home' })
   } else {
     next();
@@ -43,19 +43,21 @@ tasks._fetchAllTasks();
     }
   }
 
-  @media screen and (min-width: 481px) and (max-width: 1099px){
+  @media screen and (min-width: 481px) and (max-width: 1027px){
     .container {
       display: grid;
       grid-template-columns: 1fr 7fr 1fr;
     }
   }
 
-  @media only screen and (min-width: 1100px) and (max-width: 1920px){
+  @media only screen and (min-width: 1028px) and (max-width: 1920px){
     .container {
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
     }
   }
+
+  
 
   .main {
       background: white;
