@@ -5,6 +5,7 @@ import { supabase } from '../supabase/index'
 export const useTasksStore = defineStore('tasksList', () => {
   const tasks = ref([])
   const titleTask = ref('');
+  
   //fetch info from supabase
   async function _fetchAllTasks() {
     const {data, error} = await supabase
@@ -52,27 +53,37 @@ export const useTasksStore = defineStore('tasksList', () => {
   //edit a task
   const editMode  = ref(false); 
   const editTaskId = ref(null);
+  const titleOfEdit = ref('')
 
-  async function _editTask(taskId) {
+  function _editTask(taskElement) {
     editMode.value = true;
-    editTaskId.value = taskId;
+    editTaskId.value = taskElement.id;
+    titleOfEdit.value = taskElement.title;
+  }
+
+  function _handleCancel() {
+    editMode.value = false;
+    titleOfEdit.value = '';
+    editTaskId.value = null;
   }
 
   async function _updateTitle(task){
 
     const { error } = await supabase
     .from('tasks')
-    .update({ title: task.title})
+    .update({ title: titleOfEdit.value})
     .eq('id', task.id)
 
     if(error) {
       console.error(error)
       return
     }
-    
-    
+
+    task.title = titleOfEdit.value;
+    titleOfEdit.value = '';
     editMode.value = false;
     editTaskId.value = null;
+    
   }
 
   async function _updateStatus(task, completeStatus){
@@ -99,5 +110,5 @@ export const useTasksStore = defineStore('tasksList', () => {
   const _incompleteCount = computed(() => _incompleteTasks.value.length)
 
 
-  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus, _incompleteTasks, _completeTasks, _completeCount, _incompleteCount } 
+  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus, _incompleteTasks, _completeTasks, _completeCount, _incompleteCount, titleOfEdit, _handleCancel } 
 })

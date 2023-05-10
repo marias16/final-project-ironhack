@@ -16,13 +16,19 @@ const screenMobile = computed(() => {
 
 function handleEdit(taskElement) {
     if(screenMobile.value === false) {
-        tasks._editTask(taskElement.id)
+        tasks._editTask(taskElement)
         return
     }
 
     router.push({path: `/index/edit-task/ ${taskElement.id}`})
 }
 
+const emptyTask = computed(() => {
+    return {
+        'btn btn-accent': tasks.titleOfEdit,
+        'btn btn-disabled' : tasks.titleOfEdit === '',
+    }
+})
 
 </script>
 
@@ -31,9 +37,9 @@ function handleEdit(taskElement) {
 
     </div>
     <li class="task-container-edit task" v-if="tasks.editMode && tasks.editTaskId === task.id">
-            <input  v-model="task.title" class="input input-bordered" >
-            <button class="btn btn-success" @click="tasks._updateTitle(task)"> Save </button>
-            <button class="btn btn-ghost" @click="tasks.editMode = false"> Cancel </button>
+            <input  v-model="tasks.titleOfEdit" class="input input-bordered" >
+            <button :class="emptyTask" @click="tasks._updateTitle(task)"> Save </button>
+            <button class="btn btn-ghost" @click="tasks._handleCancel"> Cancel </button>
     </li>
 
     <li class="task task-container" v-else>
