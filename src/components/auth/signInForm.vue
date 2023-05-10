@@ -25,11 +25,9 @@ async function signInHandler () {
 
 <template>
     <div class="form">
-        <div class="alert alert-error shadow-lg" v-if="users.errorDisplay">
-          <div>
+        <div class="alertRed max-w-xl" v-if="users.errorDisplay">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             <span> {{ users.errorDisplay}}. Please, try again. </span>
-          </div>
         </div>
         <div class="input-field">
             <label for="email">Email</label> 
@@ -48,7 +46,7 @@ async function signInHandler () {
 
 <style scoped>
     .form {
-        width: 90%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -63,5 +61,13 @@ async function signInHandler () {
         gap: 0.5em;
     }
 
-    
+    .alertRed {
+        width: 100%;
+        background-color: #F87272;
+        display: flex;
+        gap: 1em;
+        padding: 1em 2em;
+        border-radius: 12px;
+    }
+
 </style>
