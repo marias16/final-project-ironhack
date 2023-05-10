@@ -15,7 +15,7 @@ async function addAndGo () {
 }
 
 const emptyField = computed(() => {
-    return tasks.titleTask === '' ? true : false; 
+    return tasks.titleTask.length < 4 ? true : false; 
 })
 </script>
 
