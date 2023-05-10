@@ -50,6 +50,11 @@ export const useTasksStore = defineStore('tasksList', () => {
     tasks.value = tasks.value.filter(task => task.id !== taskId )
   }
 
+  function _deleteAllDoneTasks () {
+    _completeTasks.value.forEach(task => {
+      _deleteTask(task.id)
+    })
+  }
   //edit a task
   const editMode  = ref(false); 
   const editTaskId = ref(null);
@@ -110,5 +115,5 @@ export const useTasksStore = defineStore('tasksList', () => {
   const _incompleteCount = computed(() => _incompleteTasks.value.length)
 
 
-  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus, _incompleteTasks, _completeTasks, _completeCount, _incompleteCount, titleOfEdit, _handleCancel } 
+  return { tasks, _fetchAllTasks, _addNewTask, _deleteTask, _deleteAllDoneTasks, titleTask, editMode, editTaskId, _editTask, _updateTitle, _updateStatus, _incompleteTasks, _completeTasks, _completeCount, _incompleteCount, titleOfEdit, _handleCancel } 
 })
