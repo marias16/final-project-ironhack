@@ -11,9 +11,9 @@ const users = useUsersStore();
 router.beforeEach(async (to, from, next) => {
   await users._fetchUser()
   
-  if (users.currentUser === null && to.name === 'home') {
+  if (users.currentUser === null && (to.name === 'home' || to.name ==='home-central' || to.name ==='edit-task' || to.name ==='create-task')) {
     next({ name: 'sign-in' })
-  } else if (users.currentUser && (to.name === 'sign-in' || to.name === 'sign-up')) {
+  } else if (users.currentUser && (to.name === 'sign-in' || to.name === 'sign-up' || to.name === 'check-email' || to.name === 'auth')) {
     next({ name: 'home' })
   } else {
     next();
