@@ -12,7 +12,7 @@ const thisTask = tasks.tasks.filter(task => idTask == task.id)[0]
 const emptyTask = computed(() => {
     return {
         'btn btn-accent': thisTask.title,
-        'btn btn-disabled' : thisTask.title === '',
+        'btn btn-disabled' : thisTask.title.length < 4,
     }
 })
 

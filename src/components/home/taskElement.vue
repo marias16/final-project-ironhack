@@ -26,7 +26,7 @@ function handleEdit(taskElement) {
 const emptyTask = computed(() => {
     return {
         'btn btn-accent': tasks.titleOfEdit,
-        'btn btn-disabled' : tasks.titleOfEdit === '',
+        'btn btn-disabled' : tasks.titleOfEdit.length < 4,
     }
 })
 
@@ -71,10 +71,9 @@ const emptyTask = computed(() => {
         box-sizing: border-box;
         border-radius: 1em;
         padding: 1em 0.2em 1em 1em;
-        transition: 40s ease-in-out;
+        transition: 0.35s ease-in-out;
     }
 
-    /*test*/
     .task:hover {
         background-color: #E8E9EB;
     }
