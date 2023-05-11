@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed,ref } from 'vue'
 import { useUsersStore } from '@/stores/users'
 import router from '@/router/index'
 
@@ -20,7 +20,12 @@ async function signInHandler () {
     await router.push({name: 'home'})
 }
 
+//toggle input
 
+const inputType = ref('password')
+function toggleInput() {
+    inputType.value = inputType.value === 'password' ? 'text' : 'password'
+}
 </script>
 
 <template>
@@ -36,7 +41,13 @@ async function signInHandler () {
         </div>
         <div class="input-field">
             <label for="password">Password</label>
-            <input class="input input-bordered w-full max-w-xl" id="password" v-model="users.password" type="password" @keyup.enter="signInHandler">
+            <div class="relative">
+                <input class="input input-bordered w-full max-w-xl" id="password" v-model="users.password" :type="inputType" @keyup.enter="signInHandler">
+                <label class="swap absolute" @click="toggleInput">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <svg v-if="inputType === 'password'" class="swap-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                </label>
+            </div>
             <p v-if="validatePassword === false" class="feedback"> Password must contain 8 characters, one symbol, una mayúscula, una minúscula y un número. </p>
         </div>
         
@@ -70,4 +81,14 @@ async function signInHandler () {
         border-radius: 12px;
     }
 
+    .absolute {
+        position: absolute;
+        top: 28%;
+        right: 4%;
+        cursor: pointer;
+        color: lightgray;
+    }
+    .relative {
+        position: relative;
+    }
 </style>
