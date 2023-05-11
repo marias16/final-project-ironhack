@@ -49,16 +49,18 @@ function toggleDone () {
     </ul>
     <AlertSuccess v-else/>
 
-    <a href="#done">
-        <div id="done" class="toggle-down" @click="toggleDone"> 
-            <svg :class="{ rotate: !doneShow }" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            <span >Done ({{ tasks._completeCount }})</span> 
-        </div>
-    </a>
-    <ul v-show="doneShow">
-        <taskElement v-for="task in tasks._completeTasks" :key="task.id" :task="task" />
-    </ul>
-    
+        <a href="#done">
+            <div id="done" class="toggle-down" @click="toggleDone"> 
+                <svg :class="{ rotate: !doneShow }" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span >Done ({{ tasks._completeCount }})</span> 
+            </div>
+        </a>
+        <ul v-show="doneShow">
+            <taskElement v-for="task in tasks._completeTasks" :key="task.id" :task="task" />
+        </ul>
+    <section class="margin">
+
+    </section>
 
 
 </template>
@@ -80,6 +82,10 @@ function toggleDone () {
 
     .rotate  {
         transform: rotate(-90deg);
+    }
+
+    .margin {
+        margin-bottom: 2em;
     }
     
 </style>

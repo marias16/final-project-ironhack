@@ -3,7 +3,6 @@ import { RouterView } from 'vue-router'
 import { useUsersStore } from './stores/users'
 import router from '@/router/index'
 import HeaderHome from './components/home/HeaderHome.vue';
-
 const users = useUsersStore();
 
 router.beforeEach(async (to, from, next) => {

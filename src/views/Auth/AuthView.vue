@@ -1,8 +1,10 @@
 <script setup>
+  import footerElement from '@/components/footerElement.vue'
 </script>
 
 <template>
   <RouterView></RouterView>
+  <footerElement />
 </template>
 
 <style scoped>
