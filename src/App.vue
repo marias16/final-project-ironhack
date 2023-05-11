@@ -3,9 +3,7 @@ import { RouterView } from 'vue-router'
 import { useUsersStore } from './stores/users'
 import router from '@/router/index'
 import HeaderHome from './components/home/HeaderHome.vue';
-import { useTasksStore } from '@/stores/tasks'
 
-const tasks = useTasksStore();
 const users = useUsersStore();
 
 router.beforeEach(async (to, from, next) => {
@@ -20,7 +18,6 @@ router.beforeEach(async (to, from, next) => {
   }
 })
 
-tasks._fetchAllTasks();
 
 </script>
 

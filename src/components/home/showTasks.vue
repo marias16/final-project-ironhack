@@ -1,11 +1,25 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useTasksStore } from '@/stores/tasks'
 import  taskElement  from './taskElement.vue'
 import AlertSuccess from './AlertSuccess.vue'
 
 const tasks = useTasksStore();
-tasks._fetchAllTasks();
+tasks._fetchAllTasks()
+
+//evitar que la alterta de to-dos vacias se muestre al principio
+const isLoading = ref(true)
+
+tasks._fetchAllTasks().then(() => {
+  isLoading.value = false
+})
+
+const showAlert = computed(() => {
+  return !isLoading.value && tasks._incompleteCount === 0
+})
+
+
+//done show toggle
 const doneShow = ref(false)
 
 watch(() => tasks._completeCount, (currentValue, oldValue) => {
@@ -24,16 +38,16 @@ function toggleDone () {
     
 }
 
-
 </script>
 
 <template>
    
     <h2 style="font-weight: bold;">To-Do ({{ tasks._incompleteCount }})</h2>
-    <AlertSuccess v-if="tasks._incompleteCount === 0"/>
-    <ul v-else>
+    
+    <ul v-if="showAlert === false">
         <taskElement v-for="task in tasks._incompleteTasks" :key="task.id" :task="task" />
     </ul>
+    <AlertSuccess v-else/>
 
     <a href="#done">
         <div id="done" class="toggle-down" @click="toggleDone"> 
