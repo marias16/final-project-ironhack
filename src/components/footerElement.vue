@@ -1,6 +1,6 @@
 <template>
 <div>
-    <p>© Simple. </p>
+    <p>© Simpel. </p>
     <p>Made with &#128154; from Barcelona</p>
 </div>
 </template>
