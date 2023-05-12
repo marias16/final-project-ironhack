@@ -3,7 +3,6 @@ import { RouterView } from 'vue-router'
 import { useUsersStore } from './stores/users'
 import router from '@/router/index'
 import HeaderHome from './components/home/HeaderHome.vue';
-import loadingElement from '@/components/home/loadingElement.vue'
 
 const users = useUsersStore();
 
@@ -23,7 +22,7 @@ router.beforeEach(async (to, from, next) => {
 </script>
 
 <template>
-  <loadingElement />
+  
   <div class="container">
     <div></div>
     <section class="main">
