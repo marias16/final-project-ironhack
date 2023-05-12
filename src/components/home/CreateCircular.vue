@@ -11,17 +11,18 @@ import router from '@/router/index'
 
 <style scoped>
 button {
-    position: fixed;
+    position: absolute;
     bottom: 1.5em;
     right: 1.5em;
     width: 4.2em;
     height: 4.2em;
+    z-index: 1;
 }
 
 @media (min-width: 480px) {
         button {
             display: none;
         }
-    }
+}
 
 </style>

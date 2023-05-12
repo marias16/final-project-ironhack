@@ -41,13 +41,23 @@ onUpdated(() => {
 
 .logo-container {
     background-color: white;
-    z-index: 999;
-    position: fixed;
+    z-index: 1000;
+    position: absolute;
     display: grid;
     place-items: center;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
+    width: 100vh;
+    height: 100vh;
 }
+
+@media screen and (max-width: 480px) {
+        .logo-container {
+            width: 100vh;
+            height: 130vh;
+        }
+}
+
 
 .logo-element {
     display: flex;
