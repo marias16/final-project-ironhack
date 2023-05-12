@@ -11,7 +11,7 @@ import router from '@/router/index'
 
 <style scoped>
 button {
-    position: absolute;
+    position: fixed;
     bottom: 1.5em;
     right: 1.5em;
     width: 4.2em;
