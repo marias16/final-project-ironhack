@@ -3,6 +3,8 @@ import { RouterView } from 'vue-router'
 import { useUsersStore } from './stores/users'
 import router from '@/router/index'
 import HeaderHome from './components/home/HeaderHome.vue';
+import loadingElement from '@/components/home/loadingElement.vue'
+
 const users = useUsersStore();
 
 router.beforeEach(async (to, from, next) => {
@@ -21,6 +23,7 @@ router.beforeEach(async (to, from, next) => {
 </script>
 
 <template>
+  <loadingElement class="h-screen w-screen"/>
   <div class="container">
     <div></div>
     <section class="main">
@@ -29,7 +32,6 @@ router.beforeEach(async (to, from, next) => {
     </section>
     <div></div>
   </div>
-  
 </template>
 
 <style scoped>
@@ -39,20 +41,33 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  @media screen and (min-width: 481px) and (max-width: 1027px){
+  @media screen and (min-width: 481px) and (max-width: 768px){
     .container {
       display: grid;
       grid-template-columns: 1fr 7fr 1fr;
     }
   }
 
-  @media only screen and (min-width: 1028px) and (max-width: 1920px){
+  @media only screen and (min-width: 769px) and (max-width: 1024px){
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+    }
+  }
+
+  @media only screen and (min-width: 1025px) and (max-width: 1279px){
     .container {
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
     }
   }
 
+  @media only screen and (min-width: 1280px) and (max-width: 1920px){
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
+    }
+  }
   
 
   .main {

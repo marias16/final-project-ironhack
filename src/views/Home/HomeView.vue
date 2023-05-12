@@ -4,9 +4,11 @@
   import createCircular from '@/components/home/CreateCircular.vue'
   import nameUser from '@/components/home/nameUser.vue'
 
+
 </script>
 
 <template>
+
   <nameUser />
   <createTask />
   <showTasks />
