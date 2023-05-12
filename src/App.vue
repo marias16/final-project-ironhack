@@ -23,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
 </script>
 
 <template>
-  <loadingElement class="h-screen w-screen"/>
+  <loadingElement />
   <div class="container">
     <div></div>
     <section class="main">
@@ -55,20 +55,27 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  @media only screen and (min-width: 1025px) and (max-width: 1279px){
+  @media only screen and (min-width: 1025px) and (max-width: 1278px){
     .container {
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
     }
   }
 
-  @media only screen and (min-width: 1280px) and (max-width: 1920px){
+  @media only screen and (min-width: 1279px) and (max-width: 1919px){
     .container {
       display: grid;
       grid-template-columns: 1fr 1.5fr 1fr;
     }
   }
   
+  @media only screen and (min-width: 1920px){
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
 
   .main {
       background: white;
