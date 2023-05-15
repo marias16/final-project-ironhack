@@ -61,14 +61,14 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  @media only screen and (min-width: 1279px) and (max-width: 1919px){
+  @media only screen and (min-width: 1279px) and (max-width: 1530px){
     .container {
       display: grid;
       grid-template-columns: 1fr 1.5fr 1fr;
     }
   }
   
-  @media only screen and (min-width: 1920px){
+  @media only screen and (min-width: 1531px){
     .container {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
